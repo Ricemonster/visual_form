@@ -1,16 +1,16 @@
 // lodash 是用来接受合并配置项的
 import lodash from 'lodash'
 
-function layoutObject(options){
+function baseObject(options){
     return lodash.merge({
         fielId: '', // 控件id
-        title: '',
         name: '', // 控件名称
+        title: '', // 控件 title
         icon: '', // 控件图标
-        setting: { // 行列布局
-            row: '',
-            col: ''
-        }
+        settings: {
+        },
+        value: '',
+        placeholder: ''
     },options)
 }
-export default layoutObject;
+export default baseObject;

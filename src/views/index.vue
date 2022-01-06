@@ -23,7 +23,7 @@ import Controller from './layout/controller.vue' // 控制器栏
 import Container from './layout/container.vue' // 页面容器
 import ControllerDetail from './layout/controllerDetail.vue' // 右侧控件设置详情
 
-import ControllerSetting from '../settings/controlList/base' // 控制器组件详情
+import ControllerSetting from '../settings/controlList' // 控制器组件详情
 
 export default {
     data(){
