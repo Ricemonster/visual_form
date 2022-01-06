@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <box />
+    <router-view />
   </div>
 </template>
 <script>
-import box from './views/index.vue'
 export default {
   name: 'App',
-  components: { box }
 }
 </script>
 
