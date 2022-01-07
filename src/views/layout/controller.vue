@@ -3,27 +3,29 @@
     <div class="container__item" v-for="(item) in componentsList" :key="item.label">
       <div class="container__item--title">{{item.label}}</div>
       <draggable
-        v-model="arr"
+        v-model="item.list"
         :group="{ name: 'TpFormGroup', pull: 'clone', put: false }"
         :sort="false"
+        :disabled="item.prohibited?true:false"
         animation="300"
+        class="container__item--box"
       >
         <!-- 这里只会显示一个所有需要一个容器分层次的分开 -->
-        <div class="container__item--box">
-          <div class="container__item--box__item" v-for="(control) in item.list" :key="control.name">
+          <div :class="['container__item--box__item',item.prohibited?'click':'']" v-for="(control) in item.list" :key="control.name" @click="clickMethod(control)">
             <svg class="icon" aria-hidden="true">
                 <use :xlink:href="control.icon"></use>
             </svg>
             <div>{{control.name}}</div>
           </div>
-        </div>
       </draggable>
     </div>
+    <ViewForm class="form" v-if="formShow" />
   </div>
 </template>
 
 <script>
 // 菜单栏详情
+import ViewForm from '../../components/viewForm.vue'
 export default {
   props: {
     componentsList: {
@@ -33,19 +35,26 @@ export default {
   },
   data() {
     return {
-      arr: ['文科','理科','新高考'],
-      radio: ''
+      formShow: false, // 设计表单的显示
     }
   },
+  components: { ViewForm },
   mounted(){
-    console.log(this.componentsList)
+  },
+  methods:{
+    clickMethod(item){
+      if(item.title == 'table'){
+        this.formShow = !this.formShow ;
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
-  width: 70%;
+  position: relative;
+  width: 100%;
   height: 100%;
   background-color: #fff;
   border-right: 1px solid #eeeff1;
@@ -60,14 +69,15 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: center;
+      flex-wrap: wrap;
       .container__item--box__item {
         display: flex;
         flex-direction:row;
         align-items: center;
         margin-top: 10px;
-        margin-right: 15px;
+        margin-right: 10px;
         font-size: 10px;
-        width: 100px;
+        width: 95px;
         cursor: move;
         background-color: #eef1f8;
         svg {
@@ -85,5 +95,14 @@ export default {
 .draggable {
   height: 100%;
   width: 100%;
+}
+
+.form {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+}
+.click {
+  cursor: pointer !important;
 }
 </style>

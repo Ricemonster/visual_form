@@ -54,14 +54,17 @@ export default {
         height: 92vh;
         display: flex;
         @include e(menu){
-            width: 18%;
             display:flex;
             flex-direction: row;
             height:100vh;
             overflow: hidden;
             background: #ffffff;
+            width: 18%;
         }
-        @include e(container){}
+        @include e(container){
+            width: 66%;
+            height: 100px;
+        }
     }
 }
 </style>

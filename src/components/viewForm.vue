@@ -1,7 +1,12 @@
 <template>
-<div class="container">
-  <div>{{row}}行 * {{col}} 列</div>
-    <div class="box" @mouseout="removeActive()" @click="designForm">
+<div class="containera">
+  <div class="title">
+    <span v-if="row == 0">
+      插入表格
+    </span>
+    <span v-else>{{row}} 行 * {{col}} 列 表格</span>
+  </div>
+  <div class="box" @mouseout="removeActive()" @click="designForm">
       <div class="row row-1">
         <div @mouseover.stop.stop="addActive($event)"  v-for="(item,index) in 12" :key="index" :class="['item',true?'item-'+(index+1) : '']">
           <div class="itembox"></div>
@@ -130,18 +135,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.containera {
   margin-left: 30px;
+  background:#fff;
+  box-shadow: -1px -1px 9px -1px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -1px -1px 9px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px -1px 9px -1px rgba(0,0,0,0.75);
+  width: 100%;
+  padding: 10px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  background-color: #e9ebf1;
+  width:100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 30px !important;
+  font-size: 12px;
+  margin-top: -10px;
 }
 .box {
   width: 190px;
   height: 200px;
+  background: #fff;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-   align-items: center;
-   margin-top: 10px;
-   margin-left: 20px;
+  align-items: center;
+  margin-top: 5px;
   
   .row {
     display: flex;
@@ -167,9 +191,6 @@ export default {
 .active {
   background-color: #e5624a;
 }
-
-
-
 // 生成的表单
 .content {
   width: 80vw;
@@ -201,4 +222,6 @@ export default {
   padding: 10px 0;
   background-color: #f9fafc;
 }
+
+
 </style>

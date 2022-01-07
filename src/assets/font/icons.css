@@ -1,5 +1,7 @@
+/* 单色图标 */
 @import url("//at.alicdn.com/t/font_3122102_487rrg5j90p.css");
 
+/* 多色图标默认样式 */
 .icon {
   width: 1.5em; height: 1.5em;
   vertical-align: -0.15em;

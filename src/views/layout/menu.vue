@@ -30,7 +30,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  width: 20%;
   height: 100%;
   border-right: 1px solid #eeeff1;
   ul {
@@ -39,7 +38,7 @@ export default {
     justify-content: center;
     li {
       color: #606266;
-      width: 100%;
+        width: 70px;
       height: 70px;
       display: flex;
       flex-direction: column;

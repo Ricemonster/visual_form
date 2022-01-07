@@ -23,7 +23,7 @@ export default {
                 toolbar: [' undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect  | alignleft aligncenter alignright alignjustify | outdent indent'],
                 plugins: " image link insertdatetime",  // 需要使用的插件列表
                 language: 'zh_CN', // 语言环境为简体中文
-                height: 500,
+                height: 800,
                 branding: false, // 隐藏底部技术支持字样
                 elementpath: false, // 隐藏底部栏元素显示
                 contextmenu_never_use_native: true, //屏蔽浏览器默认鼠标右键点击事件
