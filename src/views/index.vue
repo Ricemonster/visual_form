@@ -59,7 +59,7 @@ export default {
             height:100vh;
             overflow: hidden;
             background: #ffffff;
-            width: 18%;
+            width: 16.5%;
         }
         @include e(container){
             width: 66%;

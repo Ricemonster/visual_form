@@ -17,11 +17,11 @@ export default {
         return {
             content: '',
             setting: {
-                menubar: true,  // 显示菜单栏
+                menubar: false,  // 显示菜单栏
                 toolbar_mode: 'sliding', // 当屏幕过小，工具栏会自动隐藏一部分
                 // 工具栏插件及排版
-                toolbar: [' undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect  | alignleft aligncenter alignright alignjustify | outdent indent'],
-                plugins: " image link insertdatetime",  // 需要使用的插件列表
+                toolbar: [' undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect  | alignleft aligncenter alignright alignjustify | outdent indent table'],
+                plugins: " image link insertdatetime table",  // 需要使用的插件列表
                 language: 'zh_CN', // 语言环境为简体中文
                 height: 800,
                 branding: false, // 隐藏底部技术支持字样
