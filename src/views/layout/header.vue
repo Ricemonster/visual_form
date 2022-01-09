@@ -5,6 +5,12 @@
             <el-input v-model="name" type="text" placeholder="请输入表单名称"></el-input>
         </div>
         <div class="header__right">
+            <div class="header__right--item"  @click="toPreview">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-preview"></use>
+                </svg>
+                <span>预览</span>
+            </div>
             <div class="header__right--item"  @click="upload">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-upload"></use>
@@ -19,7 +25,7 @@
             </div>
             <el-button round class="submit" @click="download">保存</el-button>
         </div>
-        <input type="file" @change="upload(this)" />  
+        <input type="file" @change="loadTextFromFile" formenctype="text/plain" id="fileId" hidden />
     </div>
 </template>
 
@@ -28,61 +34,69 @@ import { saveAs } from 'file-saver'
 export default {
     data(){
         return {
-            name: '未命名'
+            name: '未命名',
+            formData:new FormData()
         }
     },
     methods:{
+        // 导出文件
         download() {
             this.$prompt('','请输入导出文件名',{
                 confirmButtonText: '确定导出',
                 cancelButtonText: '取消操作',
                 roundButton: true,
                 // inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-                // inputErrorMessage: '邮箱格式不正确'
+                // inputErrorMessage: '不能为空'
             }).then(({ value }) => {
                 // 获取的当前编辑器内容
                 let content = tinymce.activeEditor.getContent()
                 content = new Blob([content], { type: 'text/plain;charset=utf-8' });
-                saveAs(content, `${value}.txt`)
-                this.$message('导出成功!');
+                if(!value){
+                    saveAs(content, `visualform.txt`)
+                } else {
+                    saveAs(content, `${value}.txt`)
+                }
             })
         },
-        uplosad() {
-            // tinymce.activeEditor.setContent(
-                let fr = new FileReader()
-                fr.readAsText()
+        // 导入文件
+        upload() {
+            document.getElementById("fileId").click();
         },
-        upload(input) {  
-            console.log(input)
-            //支持chrome IE10  
-            if (window.FileReader) {  
-                var file = input.files[0];  
-                filename = file.name.split(".")[0];  
-                var reader = new FileReader();  
-                reader.onload = function() {  
-                    console.log(this.result);  
-                }  
-                reader.readAsText(file);  
-            }   
-            //支持IE 7 8 9 10  
-            else if (typeof window.ActiveXObject != 'undefined'){  
-                var xmlDoc;   
-                xmlDoc = new ActiveXObject("Microsoft.XMLDOM");   
-                xmlDoc.async = false;   
-                xmlDoc.load(input.value);   
-                console.log(xmlDoc.xml);   
-            }   
-            //支持FF  
-            else if (document.implementation && document.implementation.createDocument) {   
-                var xmlDoc;   
-                xmlDoc = document.implementation.createDocument("", "", null);   
-                xmlDoc.async = false;   
-                xmlDoc.load(input.value);   
-                console.log(xmlDoc.xml);  
-            } else {   
-                alert('error');   
-            }   
-        } 
+        // 导入文件 - 设置内容到编辑器
+        loadTextFromFile(e) {
+            const file = e.target.files[0];
+            let name = file.name.split(".").splice(-1).toString();
+            if (name !== "txt") {
+                this.$message({
+                    showClose: true,
+                    message: '文件类型错误,请重新选择文件',
+                    type: 'warning'
+                });
+                return false;
+            }
+            const reader = new FileReader();
+            if (typeof FileReader === "undefined") {
+                this.$message({
+                    showClose: true,
+                    message: '您的浏览器不支持FileReader接口',
+                    type: 'warning'
+                });
+            }
+            reader.onload = (e) => this.$emit("load", this.dealNum(e.target.result));
+            reader.readAsText(file, "utf-8"); 
+            },
+            dealNum(item) {
+            tinyMCE.activeEditor.setContent(item)
+        },
+        // 预览
+        toPreview(){
+            let content = tinymce.activeEditor.getContent()
+            this.$store.commit('addContent',content);
+            this.$router.push({
+                name:'preview', 
+                params: { content: content }
+            })
+        },
     }
 }
 </script>
@@ -111,7 +125,7 @@ export default {
     .header__right--item {
         padding-top: 10px;
         padding-bottom: 10px;
-        width: 100px;
+        width: 80px;
         display: flex;
         flex-direction: column;
         align-items: center;

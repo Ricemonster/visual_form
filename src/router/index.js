@@ -3,12 +3,19 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter)
 
-const routes = [{
-    path: '/',
-    name: 'index',
-    component: () =>
-        import ('@/views/index')
-}]
+const routes = [
+    {
+        path: '/',
+        name: 'index',
+        component: () =>
+            import ('@/views/index')
+    },{
+        path: '/preview',
+        name: 'preview',
+        component: () =>
+            import ('@/views/preview')
+    }
+]
 
 const router = new VueRouter({
     routes,

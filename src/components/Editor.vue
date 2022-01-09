@@ -13,6 +13,12 @@
 <script>
 // https://www.tiny.cloud/?title=Configuration%3Atheme_advanced_toolbar_location&showmsg=edit 排版和样式借鉴
 export default {
+    props: {
+        isToolBar: {
+            type: Array | Boolean,
+            required: true
+        }
+    },
     data(){
         return {
             content: '',
@@ -20,7 +26,7 @@ export default {
                 menubar: false,  // 显示菜单栏
                 toolbar_mode: 'sliding', // 当屏幕过小，工具栏会自动隐藏一部分
                 // 工具栏插件及排版
-                toolbar: [' undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect  | alignleft aligncenter alignright alignjustify | outdent indent table'],
+                toolbar: this.isToolBar,
                 plugins: " image link insertdatetime table",  // 需要使用的插件列表
                 language: 'zh_CN', // 语言环境为简体中文
                 height: 800,
