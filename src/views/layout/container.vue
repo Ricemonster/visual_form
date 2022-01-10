@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="禁止刷新页面,否则数据将丢失..." element-loading-spinner="el-icon-loading">
-    <Editor class="editor" :isToolBar="[' undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect  | alignleft aligncenter alignright alignjustify | outdent indent table']" />
+    <Editor class="editor" :isToolBar="[' undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect  | alignleft aligncenter alignright | outdent indent | tablemergecells tablesplitcells']" />
   </div>
 </template>
 

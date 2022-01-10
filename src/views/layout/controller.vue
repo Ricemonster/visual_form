@@ -100,7 +100,7 @@ export default {
 .form {
   position: absolute;
   top: 80px;
-  left: 0px;
+  left: -60px;
 }
 .click {
   cursor: pointer !important;

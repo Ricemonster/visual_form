@@ -1,5 +1,5 @@
 <template>
-<div class="containera">
+<div class="containera" style="z-index: 100">
   <div class="title">
     <span v-if="row == 0">
       插入表格
@@ -149,13 +149,15 @@ export default {
   align-items: center;
 }
 .title {
-  background-color: #e9ebf1;
+  background-color: #2854ff;
   width:100%;
   padding-left: 10px;
   padding-right: 10px;
   line-height: 30px !important;
   font-size: 12px;
   margin-top: -10px;
+  color: #fff;
+  font-weight: bold;
 }
 .box {
   width: 190px;
@@ -189,7 +191,7 @@ export default {
 }
 
 .active {
-  background-color: #e5624a;
+  background-color: #2854ff;
 }
 // 生成的表单
 .content {
