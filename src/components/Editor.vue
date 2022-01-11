@@ -25,9 +25,6 @@ export default {
         return {
             content: '',
             setting: {
-                theme_advanced_toolbar_location : "external", 
-                theme_advanced_toolbar_align : "left", 
-                theme_advanced_statusbar_location : "top",
                 icons_url: '/tinymce/icons/custom/icons.js', // 自定义图标
                 icons: 'christmas', // 自定义图标库名
                 // insertControl 为自定义控件到上下文菜单中
